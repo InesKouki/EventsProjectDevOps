@@ -57,11 +57,11 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: env.MAVEN_CREDENTIALS_ID, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh """
                             mvn deploy:deploy-file \
-                            -DgroupId=com.example \
-                            -DartifactId=my-app \
+                            -DgroupId=tn.esprit \
+                            -DartifactId=eventsProject \
                             -Dversion=1.0-SNAPSHOT \
                             -Dpackaging=jar \
-                            -Dfile=target/my-app-1.0-SNAPSHOT.jar \
+                            -Dfile=target/eventsProject-1.0-SNAPSHOT.jar \
                             -DrepositoryId=nexus \
                             -Durl=${env.MAVEN_REPO_URL} \
                             -Dusername=$USERNAME \
