@@ -62,7 +62,7 @@ pipeline {
                             -Dversion=1.0-SNAPSHOT \
                             -Dpackaging=jar \
                             -Dfile=target/eventsProject-1.0-SNAPSHOT.jar \
-                            -DrepositoryId=nexus \
+                            -DrepositoryId=deploymentRepo \
                             -Durl=${env.MAVEN_REPO_URL} \
                             -Dusername=$USERNAME \
                             -Dpassword=$PASSWORD
