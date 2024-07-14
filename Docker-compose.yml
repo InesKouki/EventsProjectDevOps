@@ -7,7 +7,7 @@ services:
       MYSQL_DATABASE: eventsProject
       MYSQL_ROOT_PASSWORD: rootpassword
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
@@ -17,7 +17,7 @@ services:
     image: ineskouki/events-project:1.0.0-SNAPSHOT
     container_name: spring-boot-app
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/eventsProject
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/eventsProject?&createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: rootpassword
     ports:
@@ -26,7 +26,7 @@ services:
       - mysql
     networks:
       - events-network
-
+ 
 volumes:
   mysql-data:
 
