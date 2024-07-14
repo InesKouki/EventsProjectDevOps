@@ -109,7 +109,6 @@ pipeline {
        stage('Deploying Grafana and Prometheus') {
            steps {
                script {
-                   // Check if the containers are already running
                    def prometheusExists = sh(script: "docker inspect --type=container prometheus", returnStatus: true) == 0
                    def grafanaExists = sh(script: "docker inspect --type=container grafana", returnStatus: true) == 0
 
