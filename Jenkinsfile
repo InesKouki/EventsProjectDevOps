@@ -99,6 +99,19 @@ pipeline {
                 }
             }
         }
-       
+
+         stage("Deploy with Docker Compose") {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh '''
+                            docker-compose down
+                            docker-compose pull
+                            docker-compose up -d
+                        '''
+                    }
+                }
+            }
+        }
     }
 }
