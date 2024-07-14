@@ -7,7 +7,10 @@ pipeline {
 
     environment {
         MAVEN_CREDENTIALS_ID = 'jenkins-nexus'
-        MAVEN_REPO_URL = 'http://192.168.33.10:8081/repository/Jenkins-repository/' 
+        MAVEN_REPO_URL = 'http://192.168.33.10:8081/repository/Jenkins-repository/'
+        DOCKER_CREDENTIALS_ID = 'docker-hub-credentials'
+        IMAGE_NAME = 'ineskouki/events-project'
+        IMAGE_TAG = '1.0.0-SNAPSHOT'
     }
     
     stages {
@@ -67,6 +70,31 @@ pipeline {
                             -Dusername=$USERNAME \
                             -Dpassword=$PASSWORD
                         """
+                    }
+                }
+            }
+        }
+
+        stage("Build Docker Image") {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh '''
+                            docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+                        '''
+                    }
+                }
+            }
+        }
+        
+        stage("Push Docker Image") {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh '''
+                            echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+                            docker push ${IMAGE_NAME}:${IMAGE_TAG}
+                        '''
                     }
                 }
             }
