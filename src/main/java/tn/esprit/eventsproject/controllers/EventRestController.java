@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("event")
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin("*")
 public class EventRestController {
     private final IEventServices eventServices;
 
