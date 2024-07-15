@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface IEventServices {
     public Participant addParticipant(Participant participant);
+    public List<Event> getAllEvents();
+    public List<Participant> getAllParticipants();
     public Event addAffectEvenParticipant(Event event, int idParticipant);
     public Event addAffectEvenParticipant(Event event);
     public Logistics addAffectLog(Logistics logistics, String descriptionEvent);
