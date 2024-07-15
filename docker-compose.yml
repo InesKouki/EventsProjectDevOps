@@ -26,6 +26,16 @@ services:
       - mysql
     networks:
       - events-network
+  
+    angular-app:
+    image: ineskouki/eventsProjectFront
+    container_name: docker-compose-angular-app
+    ports:
+      - "4200:4201"
+    depends_on:
+      - spring-boot-app
+    networks:
+      - my-network
  
 volumes:
   mysql-data:

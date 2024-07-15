@@ -10,10 +10,11 @@ import tn.esprit.eventsproject.services.IEventServices;
 import java.time.LocalDate;
 import java.util.List;
 
-@CrossOrigin(origins = "*")
+
 @RequiredArgsConstructor
 @RequestMapping("event")
 @RestController
+@CrossOrigin(origins = "*")
 public class EventRestController {
     private final IEventServices eventServices;
 
